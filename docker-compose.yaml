@@ -13,8 +13,8 @@ services:
       replicas: 1
       resources:
         limits:
-          cpu: "0.25"
+          cpus: "0.25"
           memory: "215M"
         reservations:
-          cpu: "0.50"
+          cpus: "0.50"
           memory: "512M"
