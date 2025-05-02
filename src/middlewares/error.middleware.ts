@@ -1,25 +1,23 @@
 import { ErrorHandler } from "hono";
 import { HTTPException } from "hono/http-exception";
-import { StatusCode } from "hono/utils/http-status";
 import { ApplicationError } from "../errors";
 import { env } from "../env";
 
 export const globalErrorMiddleware: ErrorHandler = (err, c) => {
   if (err instanceof HTTPException && err.message) {
-    return c.json(
-      {
-        message: err.message,
-      },
-      err.status
-    );
+    return c.json({ message: err.message }, err.status as any);
   }
 
   if (ApplicationError.isApplicationError(err)) {
-    return c.json(err.getResponseMessage(), err.code as StatusCode);
+    return c.json(err.getResponseMessage(), (err.code ?? 500) as any);
   }
 
   console.error("APP ERROR:", err);
-  if (env.NODE_ENV == "PRODUCTION")
-    err.message = "Something went wrong, please try again later!";
-  return c.json({ message: err.message }, 500);
+
+  const message =
+    env.NODE_ENV === "PRODUCTION"
+      ? "Something went wrong, please try again later!"
+      : err.message;
+
+  return c.json({ message }, 500);
 };
