@@ -10,7 +10,7 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install -g tsx
 
-RUN npm install
+RUN npm update
 
 # Copy the rest of the application files
 COPY . .
