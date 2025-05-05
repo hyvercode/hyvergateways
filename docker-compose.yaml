@@ -9,8 +9,8 @@ services:
       - "5555:5001"
     volumes:
       - .:/app
-    environment:
-      - NODE_ENV=production
+    # environment:
+    #   - NODE_ENV=production
     deploy:
       replicas: 1
       resources:
