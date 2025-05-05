@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 5001
 
 # Jalankan app dalam mode development
-CMD ["npx", "tsx", "watch", "src/index.ts"]
+CMD ["npx", "run", "dev"]
