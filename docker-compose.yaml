@@ -20,3 +20,8 @@ services:
         reservations:
           cpus: "0.25"
           memory: "215M"
+
+networks:
+  default:
+    name: localhost
+    external: true
